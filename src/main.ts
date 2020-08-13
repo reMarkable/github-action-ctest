@@ -16,7 +16,10 @@ async function run(): Promise<void> {
 
     const platform: string = core.getInput('platform')
     const filename: string = core.getInput('logfile')
+    core.warning('Testing warning messages')
     const logdata = await ctest_log(filename)
+
+    context.payload.repository?.name
 
     if (logdata !== '') {
       github.issues.createComment({
