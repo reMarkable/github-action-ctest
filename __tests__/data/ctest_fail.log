@@ -49,7 +49,7 @@ test 69
 Total Test time (real) = 1500.10 sec
 
 The following tests FAILED:
-	[0;31m 69 - tst_platformhelperstest (Timeout)[0;0m
+	 69 - tst_platformhelperstest (Timeout)
 [ERROR_MESSAGE] 
 Errors while running CTest
 
