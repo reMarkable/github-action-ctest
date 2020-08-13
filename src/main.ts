@@ -26,7 +26,7 @@ async function run(): Promise<void> {
         issue_number: context.payload.pull_request.number,
         owner: context.repo.owner,
         repo: context.repo.repo,
-        body: `The ctest log on '${platform}' is:\n\`\`\`${logdata}\`\`\``
+        body: `Sadly there were some test failures on '${platform}':\n\`\`\`\n${logdata}\n\`\`\``
       })
     }
   } catch (error) {

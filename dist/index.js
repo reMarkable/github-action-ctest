@@ -2547,7 +2547,7 @@ function run() {
                     issue_number: github_1.context.payload.pull_request.number,
                     owner: github_1.context.repo.owner,
                     repo: github_1.context.repo.repo,
-                    body: `The ctest log on '${platform}' is:\n\`\`\`${logdata}\`\`\``
+                    body: `The ctest log on '${platform}' is:\n\`\`\`\n${logdata}\n\`\`\``
                 });
             }
         }
