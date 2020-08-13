@@ -1995,7 +1995,13 @@ function ctest_log(logfile) {
             const fail_regexp = /^.*FAIL!.*(:?\n(:?.*\s{2,})(:?Actual|Expected|Loc).*)+/gm;
             const failures = (_c = testlog.match(fail_regexp)) === null || _c === void 0 ? void 0 : _c.join('\n');
             const report = `${summary}\n\n${failures}`;
-            resolve(report);
+            // PR comments can be up to 65536 chars long
+            const max_length = 65536 - 500;
+            if (report.length > max_length) {
+                resolve(`${report.substring(0, max_length)}...`);
+                return;
+            }
+            resolve(report.substring(0, max_length));
         });
     });
 }
