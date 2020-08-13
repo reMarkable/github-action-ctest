@@ -18,11 +18,26 @@ export async function ctest_log(logfile: string): Promise<string> {
         `File "${logfile}" was not found, looked in "${filepath}"`
       )
     }
-
-    // const fail_regexp = /^.*(FAIL!).*[^].*[^].*[^].*/
-
     const testlog = fs.readFileSync(filepath, {encoding: 'utf8'})
 
-    resolve(testlog)
+    const all_passed = /100% tests passed/
+    if (testlog.match(all_passed)) {
+      resolve('')
+      return
+    }
+
+    const summary_regexp = /The following tests FAILED:.*(?:[^]\s+.*)*/m
+    const summary =
+      testlog.match(summary_regexp)?.[0] ||
+      'Error parsing testlog, summary not found.'
+
+    console.log(`SUMMARY: >>>${summary}<<<`)
+
+    // const fail_regexp = /.*FAIL!.*[^].*[^].*[^].*/g
+    const failures = '' //testlog.match(fail_regexp)?.join('\n')
+
+    const report = `${summary}\n\n${failures}`
+
+    resolve(report)
   })
 }
