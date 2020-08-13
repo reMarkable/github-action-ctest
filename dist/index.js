@@ -1975,7 +1975,6 @@ function ctest_log(logfile) {
                 throw new Error('No file passed');
             }
             const filepath = path_1.default.join(__dirname, '..', logfile);
-            console.log('filepath:', filepath);
             if (!fs.existsSync(filepath)) {
                 throw new Error(`File "${logfile}" was not found`);
             }
@@ -2513,15 +2512,15 @@ const ctest_log_1 = __webpack_require__(123);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const token = core.getInput('github-token', { required: true });
-            const github = github_1.getOctokit(token);
             if (github_1.context.eventName !== 'pull_request') {
                 return;
             }
-            const filename = core.getInput('logfile');
             if (!github_1.context.payload.pull_request) {
                 return;
             }
+            const token = core.getInput('github-token', { required: true });
+            const github = github_1.getOctokit(token);
+            const filename = core.getInput('logfile');
             const logdata = yield ctest_log_1.ctest_log(filename);
             github.issues.createComment({
                 issue_number: github_1.context.payload.pull_request.number,
