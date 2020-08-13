@@ -1973,7 +1973,7 @@ const process = __importStar(__webpack_require__(765));
 function ctest_log(logfile) {
     return __awaiter(this, void 0, void 0, function* () {
         return new Promise(resolve => {
-            var _a;
+            var _a, _b, _c;
             if (logfile === '') {
                 throw new Error('No file passed');
             }
@@ -1983,9 +1983,19 @@ function ctest_log(logfile) {
             if (!fs.existsSync(filepath)) {
                 throw new Error(`File "${logfile}" was not found, looked in "${filepath}"`);
             }
-            // const fail_regexp = /^.*(FAIL!).*[^].*[^].*[^].*/
             const testlog = fs.readFileSync(filepath, { encoding: 'utf8' });
-            resolve(testlog);
+            const all_passed = /100% tests passed/;
+            if (testlog.match(all_passed)) {
+                resolve('');
+                return;
+            }
+            const summary_regexp = /The following tests FAILED:.*(?:[^]\s+.*)*/m;
+            const summary = ((_b = testlog.match(summary_regexp)) === null || _b === void 0 ? void 0 : _b[0]) ||
+                'Error parsing testlog, summary not found.';
+            const fail_regexp = /^.*FAIL!.*(:?\n(:?.*\s{2,})(:?Actual|Expected|Loc).*)+/gm;
+            const failures = (_c = testlog.match(fail_regexp)) === null || _c === void 0 ? void 0 : _c.join('\n');
+            const report = `${summary}\n\n${failures}`;
+            resolve(report);
         });
     });
 }
@@ -2532,7 +2542,7 @@ function run() {
             core.warning('Testing warning messages');
             const logdata = yield ctest_log_1.ctest_log(filename);
             (_a = github_1.context.payload.repository) === null || _a === void 0 ? void 0 : _a.name;
-            if (logdata !== '') {
+            if (logdata) {
                 github.issues.createComment({
                     issue_number: github_1.context.payload.pull_request.number,
                     owner: github_1.context.repo.owner,
