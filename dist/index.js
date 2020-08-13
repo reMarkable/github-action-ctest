@@ -1968,16 +1968,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ctest_log = void 0;
 const fs = __importStar(__webpack_require__(747));
 const path_1 = __importDefault(__webpack_require__(622));
+const github_1 = __webpack_require__(469);
+const process = __importStar(__webpack_require__(765));
 function ctest_log(logfile) {
     return __awaiter(this, void 0, void 0, function* () {
         return new Promise(resolve => {
+            var _a;
             if (logfile === '') {
                 throw new Error('No file passed');
             }
-            const filepath = path_1.default.join(__dirname, '..', logfile);
+            const basePath = process.env.RUNNER_WORKSPACE || './';
+            const repoName = ((_a = github_1.context.payload.repository) === null || _a === void 0 ? void 0 : _a.name) || '';
+            const filepath = path_1.default.join(basePath, repoName, logfile);
             if (!fs.existsSync(filepath)) {
-                throw new Error(`File "${logfile}" was not found`);
+                throw new Error(`File "${logfile}" was not found, looked in "${filepath}"`);
             }
+            // const fail_regexp = /^.*(FAIL!).*[^].*[^].*[^].*/
             const testlog = fs.readFileSync(filepath, { encoding: 'utf8' });
             resolve(testlog);
         });
@@ -2510,6 +2516,7 @@ const core = __importStar(__webpack_require__(470));
 const github_1 = __webpack_require__(469);
 const ctest_log_1 = __webpack_require__(123);
 function run() {
+    var _a;
     return __awaiter(this, void 0, void 0, function* () {
         try {
             if (github_1.context.eventName !== 'pull_request') {
@@ -2520,14 +2527,19 @@ function run() {
             }
             const token = core.getInput('github-token', { required: true });
             const github = github_1.getOctokit(token);
+            const platform = core.getInput('platform');
             const filename = core.getInput('logfile');
+            core.warning('Testing warning messages');
             const logdata = yield ctest_log_1.ctest_log(filename);
-            github.issues.createComment({
-                issue_number: github_1.context.payload.pull_request.number,
-                owner: github_1.context.repo.owner,
-                repo: github_1.context.repo.repo,
-                body: `The ctest log on '\${{ runner.os }}' is:\n\`\`\`${logdata}\`\`\``
-            });
+            (_a = github_1.context.payload.repository) === null || _a === void 0 ? void 0 : _a.name;
+            if (logdata !== '') {
+                github.issues.createComment({
+                    issue_number: github_1.context.payload.pull_request.number,
+                    owner: github_1.context.repo.owner,
+                    repo: github_1.context.repo.repo,
+                    body: `The ctest log on '${platform}' is:\n\`\`\`${logdata}\`\`\``
+                });
+            }
         }
         catch (error) {
             core.setFailed(error.message);
@@ -7357,6 +7369,13 @@ function removeHook (state, name, method) {
   state.registry[name].splice(index, 1)
 }
 
+
+/***/ }),
+
+/***/ 765:
+/***/ (function(module) {
+
+module.exports = require("process");
 
 /***/ }),
 
