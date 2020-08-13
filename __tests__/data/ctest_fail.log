@@ -40,3 +40,16 @@ test 69
 69: PASS   : PlatformHelpersTest::cleanupTestCase()
 69: Totals: 7 passed, 1 failed, 0 skipped, 0 blacklisted, 182771ms
 69: ********* Finished testing of PlatformHelpersTest *********
+[HANDLER_OUTPUT] 
+1/1 Test #69: tst_platformhelperstest ..........
+***Timeout 1500.09 sec
+
+0% tests passed[0;0m, [0;31m1 tests failed[0;0m out of 1
+
+Total Test time (real) = 1500.10 sec
+
+The following tests FAILED:
+	[0;31m 69 - tst_platformhelperstest (Timeout)[0;0m
+[ERROR_MESSAGE] 
+Errors while running CTest
+
