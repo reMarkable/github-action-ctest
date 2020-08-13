@@ -14,15 +14,18 @@ async function run(): Promise<void> {
     const token = core.getInput('github-token', {required: true})
     const github = getOctokit(token)
 
+    const platform: string = core.getInput('platform')
     const filename: string = core.getInput('logfile')
     const logdata = await ctest_log(filename)
 
-    github.issues.createComment({
-      issue_number: context.payload.pull_request.number,
-      owner: context.repo.owner,
-      repo: context.repo.repo,
-      body: `The ctest log on '\${{ runner.os }}' is:\n\`\`\`${logdata}\`\`\``
-    })
+    if (logdata !== '') {
+      github.issues.createComment({
+        issue_number: context.payload.pull_request.number,
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        body: `The ctest log on '${platform}' is:\n\`\`\`${logdata}\`\`\``
+      })
+    }
   } catch (error) {
     core.setFailed(error.message)
   }
