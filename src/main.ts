@@ -1,16 +1,28 @@
 import * as core from '@actions/core'
-import {wait} from './wait'
+import {context, getOctokit} from '@actions/github'
+import {ctest_log} from './ctest_log'
 
 async function run(): Promise<void> {
   try {
-    const ms: string = core.getInput('milliseconds')
-    core.debug(`Waiting ${ms} milliseconds ...`) // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
+    const token = core.getInput('github-token', {required: true})
+    const github = getOctokit(token)
 
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
+    if (context.eventName !== 'pull_request') {
+      return
+    }
+    if (!context.payload.pull_request) {
+      return
+    }
 
-    core.setOutput('time', new Date().toTimeString())
+    const filename: string = core.getInput('logfile')
+    const logdata = await ctest_log(filename)
+
+    github.issues.createComment({
+      issue_number: context.payload.pull_request.number,
+      owner: context.repo.owner,
+      repo: context.repo.repo,
+      body: `The ctest log on '\${{ runner.os }}' is:\n\`\`\`${logdata}\`\`\``
+    })
   } catch (error) {
     core.setFailed(error.message)
   }

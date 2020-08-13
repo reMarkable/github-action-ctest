@@ -1,11 +1,11 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'reMarkable ctest'
+description: 'GitHub Action to post result of ctest runs as comments'
+author: 'reMarkable'
 inputs:
-  milliseconds: # change this
+  logfile:
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+    description: 'The ctest log'
+    default: 'build/ctest.log'
 runs:
   using: 'node12'
   main: 'dist/index.js'
