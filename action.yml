@@ -6,6 +6,10 @@ inputs:
     required: true
     description: 'The ctest log'
     default: 'build/ctest.log'
+  github-token:
+    description: The GitHub token used to create an authenticated client
+    default: ${{ github.token }}
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'

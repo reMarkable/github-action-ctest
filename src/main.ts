@@ -4,15 +4,15 @@ import {ctest_log} from './ctest_log'
 
 async function run(): Promise<void> {
   try {
-    const token = core.getInput('github-token', {required: true})
-    const github = getOctokit(token)
-
     if (context.eventName !== 'pull_request') {
       return
     }
     if (!context.payload.pull_request) {
       return
     }
+
+    const token = core.getInput('github-token', {required: true})
+    const github = getOctokit(token)
 
     const filename: string = core.getInput('logfile')
     const logdata = await ctest_log(filename)
