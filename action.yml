@@ -10,6 +10,10 @@ inputs:
     description: The GitHub token used to create an authenticated client
     default: ${{ github.token }}
     required: false
+  platform:
+    description: Description of where the tests were run
+    default: Unknown OS (please set platform)
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'
