@@ -1,0 +1,9 @@
+[HANDLER_OUTPUT] 
+Test project /home/frederik/dev/remarkable/xochitl/build
+
+    Start 2: tst_line
+1/1 Test #2: tst_line .........................   Passed    0.68 sec
+
+[0;32m100% tests passed[0;0m, 0 tests failed[0;0m out of 1
+
+Total Test time (real) =   0.69 sec
