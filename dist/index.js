@@ -2545,7 +2545,6 @@ function run() {
             const github = github_1.getOctokit(token);
             const platform = core.getInput('platform');
             const filename = core.getInput('logfile');
-            core.warning('Testing warning messages');
             const logdata = yield ctest_log_1.ctest_log(filename);
             (_a = github_1.context.payload.repository) === null || _a === void 0 ? void 0 : _a.name;
             if (logdata) {
