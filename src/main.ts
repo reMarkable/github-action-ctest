@@ -21,7 +21,7 @@ async function run(): Promise<void> {
     context.payload.repository?.name
 
     if (logdata) {
-      github.issues.createComment({
+      github.rest.issues.createComment({
         issue_number: context.payload.pull_request.number,
         owner: context.repo.owner,
         repo: context.repo.repo,
