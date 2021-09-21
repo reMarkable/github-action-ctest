@@ -1,8 +1,7 @@
 import * as fs from 'fs'
+import * as process from 'process'
 import Path from 'path'
 import {context} from '@actions/github'
-
-import * as process from 'process'
 
 export async function ctest_log(logfile: string): Promise<string> {
   return new Promise(resolve => {
