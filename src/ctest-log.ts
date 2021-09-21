@@ -31,7 +31,8 @@ export async function ctest_log(logfile: string): Promise<string> {
       testlog.match(summary_regexp)?.[0] ||
       'Error parsing testlog, summary not found.'
 
-    const fail_regexp = /^.*FAIL!.*(:?\n(:?.*\s{2,})(:?Actual|Expected|Loc).*)+/gm
+    const fail_regexp =
+      /^.*FAIL!.*(:?\n(:?.*\s{2,})(:?Actual|Expected|Loc).*)+/gm
     const failures = testlog.match(fail_regexp)?.join('\n')
 
     const report = `${summary}\n\n${failures}`
