@@ -1,4 +1,4 @@
-import {ctest_log} from '../src/ctest_log'
+import {ctest_log} from '../src/ctest-log'
 import * as process from 'process'
 import * as cp from 'child_process'
 import * as path from 'path'

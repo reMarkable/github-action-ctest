@@ -1,6 +1,6 @@
 import * as core from '@actions/core'
 import {context, getOctokit} from '@actions/github'
-import {ctest_log} from './ctest_log'
+import {ctest_log} from './ctest-log'
 
 async function run(): Promise<void> {
   try {
