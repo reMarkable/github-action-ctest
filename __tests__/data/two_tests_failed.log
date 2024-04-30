@@ -2730,6 +2730,5 @@ Total Test time (real) =  35.09 sec
 The following tests FAILED:
 	  1 - tst_brushgfx (Failed)
 	 60 - tst_librarycontroller (Child aborted)
-[ERROR_MESSAGE] 
+[ERROR_MESSAGE]
 Errors while running CTest
-
