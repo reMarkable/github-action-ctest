@@ -1,8 +1,7 @@
 {
-  "name": "typescript-action",
+  "name": "github-action-ctest",
   "version": "0.0.0",
   "private": true,
-  "description": "TypeScript template action",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
@@ -43,5 +42,8 @@
     "prettier": "2.8.8",
     "ts-jest": "^29.1.0",
     "typescript": "^5.1.5"
+  },
+  "engines": {
+    "node": "v20"
   }
 }

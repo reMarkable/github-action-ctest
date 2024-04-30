@@ -1,13 +1,13 @@
-[HANDLER_VERBOSE_OUTPUT] 
+[HANDLER_VERBOSE_OUTPUT]
 UpdateCTestConfiguration  from :/home/frederik/dev/remarkable/xochitl/build/DartConfiguration.tcl
 
 Parse Config file:/home/frederik/dev/remarkable/xochitl/build/DartConfiguration.tcl
 UpdateCTestConfiguration  from :/home/frederik/dev/remarkable/xochitl/build/DartConfiguration.tcl
 Parse Config file:/home/frederik/dev/remarkable/xochitl/build/DartConfiguration.tcl
-[HANDLER_OUTPUT] 
+[HANDLER_OUTPUT]
 Test project /home/frederik/dev/remarkable/xochitl/build
 
-[HANDLER_VERBOSE_OUTPUT] 
+[HANDLER_VERBOSE_OUTPUT]
 Constructing a list of tests
 
 Done constructing a list of tests
@@ -16,10 +16,10 @@ Added 0 tests to meet fixture requirements
 Checking test dependency graph...
 Checking test dependency graph end
 test 69
-[HANDLER_OUTPUT] 
+[HANDLER_OUTPUT]
     Start 69: tst_platformhelperstest
 
-[HANDLER_VERBOSE_OUTPUT] 
+[HANDLER_VERBOSE_OUTPUT]
 
 69: Test command: /home/frederik/dev/remarkable/xochitl/build/unittests/tst_platformhelperstest
 
@@ -40,7 +40,7 @@ test 69
 69: PASS   : PlatformHelpersTest::cleanupTestCase()
 69: Totals: 7 passed, 1 failed, 0 skipped, 0 blacklisted, 182771ms
 69: ********* Finished testing of PlatformHelpersTest *********
-[HANDLER_OUTPUT] 
+[HANDLER_OUTPUT]
 1/1 Test #69: tst_platformhelperstest ..........
 ***Timeout 1500.09 sec
 
@@ -50,6 +50,5 @@ Total Test time (real) = 1500.10 sec
 
 The following tests FAILED:
 	 69 - tst_platformhelperstest (Timeout)
-[ERROR_MESSAGE] 
+[ERROR_MESSAGE]
 Errors while running CTest
-
