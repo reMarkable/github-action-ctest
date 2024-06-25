@@ -44,6 +44,6 @@
     "typescript": "^5.4.5"
   },
   "engines": {
-    "node": "v20"
+    "node": "20.15.0"
   }
 }
